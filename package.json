@@ -1,0 +1,27 @@
+{
+  "name": "automationnew",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "if exist allure-results (rmdir /s /q allure-results) && mkdir allure-results",
+    "test": "npx playwright test",
+    "test:report": "if exist allure-results (rmdir /s /q allure-results) && mkdir allure-results && npx playwright test && allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@azure/identity": "^4.14.0",
+    "@azure/playwright": "^1.1.6",
+    "@playwright/test": "^1.62.0",
+    "@types/node": "^26.1.0",
+    "allure-playwright": "^3.10.2"
+  },
+  "dependencies": {
+    "allure-commandline": "^2.43.0"
+  }
+}

@@ -1,0 +1,121 @@
+Test Scenario ID,Test Scenario,Test Case ID,Test Case Title,Type,Preconditions,Test Steps,Expected Result,Acceptance Criteria Mapped,Priority,Status
+
+TS-01,Verify automatic status update when blog is published and tracked through GC,TC-001,Auto mark blog as Used after successful GC-tracked publication,Positive,"1. User is logged in with publishing role
+2. Blog exists in unused repository
+3. External website is connected to GC for publishing","1. Navigate to Blog Repository
+2. Select an unused blog
+3. Click Publish via GC
+4. Select a GC-connected website
+5. Complete the publication flow
+6. Observe blog status after successful publication","Blog status is automatically updated to Used without any manual action required","AC1: When a blog is successfully published and tracked through GC its status is automatically updated to Used",High,Ready
+
+TS-01,Verify automatic status update when blog is published and tracked through GC,TC-002,Auto-remove blog from unused repository after GC-tracked publication,Positive,"1. User is logged in with publishing role
+2. Blog exists in unused repository
+3. External website is connected to GC","1. Navigate to Blog Repository > Unused Blogs list
+2. Note the blog count
+3. Publish a blog via GC to a connected website
+4. Wait for publication confirmation
+5. Return to Unused Blogs list
+6. Verify the published blog is no longer listed","Published blog is removed from the unused repository list and count decreases by 1","AC2: A blog successfully tracked through GC is automatically removed from the unused repository list",High,Ready
+
+TS-01,Verify automatic status update when blog is published and tracked through GC,TC-003,Verify Mark as Used option is NOT shown for GC-tracked publications,Positive,"1. Blog has been published and tracked through GC
+2. Blog status is Used","1. Navigate to Blog Repository
+2. Locate the blog that was published via GC
+3. Open the blog action menu or detail view
+4. Check for presence of Mark as Used option","Mark as Used option is not visible or is disabled for blogs already tracked by GC","AC3: The manual Mark as Used option is available only for publications completed outside GC or for publications that GC could not track",High,Ready
+
+TS-02,Verify manual Mark as Used for blogs published outside GC,TC-004,Manual Mark as Used available for blog downloaded and published outside GC,Positive,"1. User has publishing role
+2. Blog was downloaded from GC
+3. Blog was published on a non-GC-connected website
+4. Blog still shows as unused in GC","1. Navigate to Blog Repository > Unused Blogs
+2. Locate the downloaded blog
+3. Open the blog action menu
+4. Verify Mark as Used option is present
+5. Click Mark as Used
+6. Select the customer website where it was published
+7. Confirm the action","Mark as Used option is available; blog status updates to Used and is removed from unused list","AC3: The manual Mark as Used option is available only for publications completed outside GC or for publications that GC could not track",High,Ready
+
+TS-02,Verify manual Mark as Used for blogs published outside GC,TC-005,User can map blog to customer website during manual Mark as Used,Positive,"1. Blog was published outside GC
+2. Blog is in unused state in GC","1. Click Mark as Used on the unused blog
+2. In the dialog/form that appears verify a website mapping field is present
+3. Select or enter the customer website URL where the blog was published
+4. Submit the form","Blog is marked as Used and mapped to the specified customer website; mapping is saved and visible in blog details","AC3: Manual Mark as Used option available for outside-GC publications; AC6: Updated status reflected in repository and publishing counts",High,Ready
+
+TS-02,Verify manual Mark as Used for blogs published outside GC,TC-006,Repository and publishing counts update after manual Mark as Used,Positive,"1. Blog is in unused state
+2. User has publishing role","1. Note current unused blog count and publishing count
+2. Manually mark a blog as Used
+3. Map it to a customer website
+4. Confirm the action
+5. Check unused blog count
+6. Check publishing count","Unused blog count decreases by 1; publishing count increases by 1; changes are reflected immediately in the dashboard","AC6: The updated status is reflected in repository and publishing counts",High,Ready
+
+TS-03,Verify audit trail recording for manual Mark as Used action,TC-007,Manual Mark as Used action is recorded in audit trail,Positive,"1. User is logged in with publishing role
+2. Blog is in unused state","1. Manually mark a blog as Used and map to a website
+2. Navigate to Audit Trail / Activity Log
+3. Search or filter by the blog name or action type
+4. Locate the audit entry for the Mark as Used action","Audit trail contains an entry with: user who performed the action, timestamp, blog name, action type (Mark as Used), and mapped website","AC5: The manual action is recorded in the audit trail",High,Ready
+
+TS-03,Verify audit trail recording for manual Mark as Used action,TC-008,Audit trail entry contains correct user and timestamp,Positive,"1. User A is logged in
+2. Blog is in unused state","1. Log in as User A
+2. Manually mark a blog as Used
+3. Navigate to Audit Trail
+4. Locate the entry for the action","Audit entry shows the correct username (User A) and an accurate timestamp matching the time of the action","AC5: The manual action is recorded in the audit trail",Medium,Ready
+
+TS-04,Verify prevention of duplicate manual marking when GC publication record exists,TC-009,Cannot manually mark as Used if GC publication record already exists,Negative,"1. Blog has an existing successful GC publication record
+2. Blog status is Used (auto-tracked)","1. Navigate to Blog Repository
+2. Locate a blog that was already published and tracked via GC
+3. Attempt to access Mark as Used option
+4. Try to submit the manual marking","System prevents the action; an error or informational message is displayed stating the blog already has a GC publication record; status remains unchanged","AC4: If a successful GC publication record already exists the same blog cannot be manually marked as Used again",Critical,Ready
+
+TS-04,Verify prevention of duplicate manual marking when GC publication record exists,TC-010,Error message shown when attempting duplicate manual Mark as Used,Negative,"1. Blog already has a GC-tracked Used status","1. Attempt to manually mark the blog as Used via any available UI path
+2. Observe the system response","A clear error or warning message is displayed (e.g. This blog has already been published and tracked through GC. Manual marking is not allowed.); no duplicate record is created","AC4: If a successful GC publication record already exists the same blog cannot be manually marked as Used again",High,Ready
+
+TS-05,Verify Mark as Used is unavailable for blogs not downloaded outside GC,TC-011,Mark as Used not available for blogs never downloaded from GC,Negative,"1. Blog exists in repository
+2. Blog has never been downloaded or published","1. Navigate to Blog Repository
+2. Select a blog that has never been downloaded
+3. Open the action menu
+4. Check for Mark as Used option","Mark as Used option is not available for blogs that have no download history outside GC","AC3: Manual Mark as Used option is available only for outside-GC or untracked publications",Medium,Ready
+
+TS-05,Verify Mark as Used is unavailable for blogs not downloaded outside GC,TC-012,Mark as Used not available for blogs already in Used status,Negative,"1. Blog is already in Used status (any source)","1. Navigate to Blog Repository
+2. Locate a blog with Used status
+3. Open the action menu
+4. Check for Mark as Used option","Mark as Used option is not available or is disabled for blogs already in Used status","AC3 and AC4",Medium,Ready
+
+TS-06,Verify mandatory website mapping during manual Mark as Used,TC-013,Cannot submit Mark as Used without selecting a customer website,Negative,"1. Blog is in unused state
+2. Mark as Used dialog is open","1. Open Mark as Used dialog for an unused blog
+2. Leave the customer website field empty
+3. Click Confirm or Submit","System displays a validation error (e.g. Please select or enter the customer website); form is not submitted; blog status remains unchanged","AC3: Manual Mark as Used requires mapping to relevant customer website",High,Ready
+
+TS-06,Verify mandatory website mapping during manual Mark as Used,TC-014,Cannot submit Mark as Used with invalid website URL,Negative,"1. Blog is in unused state
+2. Mark as Used dialog is open","1. Open Mark as Used dialog
+2. Enter an invalid or malformed URL in the website field (e.g. notawebsite or http://)
+3. Click Confirm or Submit","System displays a validation error for invalid URL format; form is not submitted","AC3: Manual Mark as Used requires mapping to relevant customer website",Medium,Ready
+
+TS-07,Verify role-based access for Mark as Used action,TC-015,Publishing user can perform manual Mark as Used,Positive,"1. User has publishing role
+2. Blog is in unused state and eligible for manual marking","1. Log in as a user with publishing role
+2. Navigate to unused blog
+3. Attempt to Mark as Used and map to website","Action is allowed; blog is marked as Used successfully","AC3: Manual Mark as Used available for eligible publications",High,Ready
+
+TS-07,Verify role-based access for Mark as Used action,TC-016,Non-publishing user cannot perform manual Mark as Used,Negative,"1. User has read-only or non-publishing role
+2. Blog is in unused state","1. Log in as a user without publishing role
+2. Navigate to unused blog
+3. Check for Mark as Used option","Mark as Used option is not visible or is disabled for non-publishing users; action cannot be performed",AC3,High,Ready
+
+TS-08,Verify GC auto-tracking does not trigger for non-connected websites,TC-017,Blog published to non-GC-connected website remains unused until manually marked,Positive,"1. Blog is in unused state
+2. Target website is NOT connected to GC","1. Download the blog from GC
+2. Manually publish it on a non-GC-connected website
+3. Return to GC and check blog status","Blog status remains Unused in GC; no automatic update occurs; manual Mark as Used option is available","AC3: Manual marking required when GC cannot track publication",High,Ready
+
+TS-08,Verify GC auto-tracking does not trigger for non-connected websites,TC-018,GC auto-tracks and marks Used only for connected website publications,Positive,"1. Blog is in unused state
+2. Target website IS connected to GC","1. Publish blog via GC to a connected website
+2. Verify GC receives publication confirmation
+3. Check blog status in repository","Blog is automatically marked as Used; removed from unused list; no manual action needed","AC1 and AC2",High,Ready
+
+TS-09,Verify system behavior when GC fails to capture publication status,TC-019,Mark as Used available when GC publication tracking fails,Positive,"1. Blog was published via GC but tracking failed (e.g. network error or webhook failure)
+2. Blog still shows as unused","1. Identify a blog where GC publication tracking failed
+2. Navigate to the blog in repository
+3. Check for Mark as Used option","Mark as Used option is available as a fallback; user can manually update the status and map to the website","AC3: Manual marking required when GC is unable to capture publication status",High,Ready
+
+TS-09,Verify system behavior when GC fails to capture publication status,TC-020,Audit trail distinguishes between auto-tracked and manually marked Used status,Positive,"1. One blog was auto-tracked by GC
+2. Another blog was manually marked as Used","1. Navigate to Audit Trail
+2. Compare entries for auto-tracked vs manually marked blogs","Audit entries clearly indicate the source of the Used status: System (auto-tracked) vs User (manual); timestamps and user details are accurate for manual entries","AC5: The manual action is recorded in the audit trail",Medium,Ready

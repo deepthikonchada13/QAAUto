@@ -1,0 +1,1 @@
+Dialog message: Appointment rescheduled successfully!

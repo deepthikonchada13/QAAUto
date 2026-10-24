@@ -1,0 +1,81 @@
+
+Running 3 tests using 1 worker
+
+  ✘  1 tests\TenantEditAndExtend.spec.js:11:3 › Super Admin — Tenant edit fields › Positive: edit tenant name and email with valid values (30.0s)
+  ✘  2 tests\TenantEditAndExtend.spec.js:22:3 › Super Admin — Tenant edit fields › Negative: edit tenant with invalid email shows validation error (30.0s)
+  ✘  3 tests\TenantEditAndExtend.spec.js:30:3 › Super Admin — Tenant edit fields › Negative: edit tenant with blank email shows required validation (30.0s)
+
+
+  1) tests\TenantEditAndExtend.spec.js:11:3 › Super Admin — Tenant edit fields › Positive: edit tenant name and email with valid values 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '✏️ Edit Tenant' })
+
+
+       at PageObjects\SuperAdminPage.js:90
+
+      88 |         await this.searchTenant(tenantName);
+      89 |         await this.clickTenantActions(tenantName);
+    > 90 |         await this.page.getByRole('button', { name: '✏️ Edit Tenant' }).click();
+         |                                                                         ^
+      91 |         const nameInput = this.page.locator('div[role="dialog"] input[type="text"]').first();
+      92 |         const emailInput = this.page.locator('div[role="dialog"] input[type="email"]');
+      93 |         if (updatedName) await nameInput.fill(updatedName);
+        at SuperAdminPage.editTenant (C:\Users\DeepthiKonchada\Downloads\AutomationNew\PageObjects\SuperAdminPage.js:90:73)
+        at C:\Users\DeepthiKonchada\Downloads\AutomationNew\tests\TenantEditAndExtend.spec.js:15:5
+
+    Error Context: test-results\tests-TenantEditAndExtend--4b437-and-email-with-valid-values\error-context.md
+
+  2) tests\TenantEditAndExtend.spec.js:22:3 › Super Admin — Tenant edit fields › Negative: edit tenant with invalid email shows validation error 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '✏️ Edit Tenant' })
+
+
+       at PageObjects\SuperAdminPage.js:90
+
+      88 |         await this.searchTenant(tenantName);
+      89 |         await this.clickTenantActions(tenantName);
+    > 90 |         await this.page.getByRole('button', { name: '✏️ Edit Tenant' }).click();
+         |                                                                         ^
+      91 |         const nameInput = this.page.locator('div[role="dialog"] input[type="text"]').first();
+      92 |         const emailInput = this.page.locator('div[role="dialog"] input[type="email"]');
+      93 |         if (updatedName) await nameInput.fill(updatedName);
+        at SuperAdminPage.editTenant (C:\Users\DeepthiKonchada\Downloads\AutomationNew\PageObjects\SuperAdminPage.js:90:73)
+        at C:\Users\DeepthiKonchada\Downloads\AutomationNew\tests\TenantEditAndExtend.spec.js:26:5
+
+    Error Context: test-results\tests-TenantEditAndExtend--44347-mail-shows-validation-error\error-context.md
+
+  3) tests\TenantEditAndExtend.spec.js:30:3 › Super Admin — Tenant edit fields › Negative: edit tenant with blank email shows required validation 
+
+    Test timeout of 30000ms exceeded.
+
+    Error: locator.click: Test timeout of 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '✏️ Edit Tenant' })
+
+
+       at PageObjects\SuperAdminPage.js:90
+
+      88 |         } else {
+      89 |             await actionsButton.scrollIntoViewIfNeeded();
+    > 90 |             await actionsButton.click({ force: true });
+         |                                                                         ^
+      91 |         }
+      92 |         await this.page.waitForTimeout(500);
+      93 |     }
+        at SuperAdminPage.editTenant (C:\Users\DeepthiKonchada\Downloads\AutomationNew\PageObjects\SuperAdminPage.js:90:73)
+        at C:\Users\DeepthiKonchada\Downloads\AutomationNew\tests\TenantEditAndExtend.spec.js:34:5
+
+    Error Context: test-results\tests-TenantEditAndExtend--56b56-l-shows-required-validation\error-context.md
+
+  3 failed
+    tests\TenantEditAndExtend.spec.js:11:3 › Super Admin — Tenant edit fields › Positive: edit tenant name and email with valid values 
+    tests\TenantEditAndExtend.spec.js:22:3 › Super Admin — Tenant edit fields › Negative: edit tenant with invalid email shows validation error 
+    tests\TenantEditAndExtend.spec.js:30:3 › Super Admin — Tenant edit fields › Negative: edit tenant with blank email shows required validation 
